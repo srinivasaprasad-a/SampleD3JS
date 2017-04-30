@@ -1,0 +1,53 @@
+{
+ "name" : "Teja",
+ "children" : [
+ 	{
+ 	"name" : "Saumyadipta Samantaray",
+ 	"children" : [
+	 	{"name": "Anuradha M Kulkarni"},
+		{"name": "Arsha Sreelesh"},
+		{"name": "Ashwathi Krishnan"},
+		{"name": "Dipsikha Rabha"},
+		{"name": "Indranil Paul"},
+		{"name": "Mahesh Vallem"},
+		{"name": "Miklos K Palfi"},
+		{"name": "Monisha Sumani"},
+		{"name": "Neelima Sharnagat"},
+		{"name": "Parthasarathi Sahani"},
+		{"name": "Pranitha KN "},
+		{"name": "Saumya Sharma"},
+		{"name": "Shahan Sayeed"},
+		{"name": "Shrankhla Pandey"},
+		{"name": "Sneha Sinha"},
+		{"name": "Somani V Devi"},
+		{"name": "Sravanthi D"},
+		{"name": "Srinivasa Prasad A"},
+		{"name": "Thomas L Wagner"},
+		{"name": "Uday Kumar"},
+		{"name": "Varma Parepalli"}
+ 	]
+ 	},
+ 	{
+ 	"name" : "Yogesh Bhardwaj",
+ 	"children" : [
+ 		{"name": "Alison O Dwyer"},
+		{"name": "Balakrishnan Ramasubbu"},
+		{"name": "Boothanathan Petchiappan"},
+		{"name": "Ciara Smyth"},
+		{"name": "Comrade Jenni Movva"},
+		{"name": "Gayathri Balachandra"},
+		{"name": "Joseph F Garbarino"},
+		{"name": "Joseph Herlihy"},
+		{"name": "Kailas Kaki"},
+		{"name": "Kousalya Devi Selvaraj"},
+		{"name": "Krishna C Kommineni"},
+		{"name": "Krishnaraja Miyala"},
+		{"name": "Narsing Arige"},
+		{"name": "Naveen Challa"},
+		{"name": "Praveen Kadipikonda"},
+		{"name": "Shravan K Batlanki"},
+		{"name": "Srinivasa R Tanigundala"}	
+ 	]
+ 	}
+  ]
+}
