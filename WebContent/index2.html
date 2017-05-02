@@ -30,14 +30,15 @@ path.link {
 </style>
 </head>
 <body>
+	<div id="headerpart" align="center" style="font-family: Verdana, Geneva, sans-serif">
+		<font color="red">Less than 70%		</font>
+		<font color="orange">	Between 70% and 100%</font>
+		<font color="steelblue">	100%</font>
+	</div>
 	<div id="body" style="width: 1000; height: 100%; float: left;"></div>
-	<!-- <div id="dashboard" style="width: 400; height: 100%; text-align: left; vertical-align: top; float: right;"></div> -->
 	<div id="righttopcorner" style="float: right;">
-	<!-- <div id='nameboard' style="width: 100;">
-		<h5 style="float: left;">Sample</h5>
-		<button type="button" style="float: right;" onclick="alert('Hello world!')">Un-utilized View</button>
-	</div> -->
-	<div id='chart'></div>
+		<p id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif">Heading2</p>
+		<div id='chart'></div>
 	</div>
 
 	<script type="text/javascript">
@@ -116,6 +117,9 @@ path.link {
 		}
 
 		function getChartData(resname) {
+			
+			document.getElementById("chart-heading").innerHTML = resname;
+			
 			  jsonArray['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
 			  jsonArray_unallocated['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
 			  var idx = 0;
