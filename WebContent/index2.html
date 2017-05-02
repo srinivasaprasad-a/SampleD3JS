@@ -33,10 +33,10 @@ path.link {
 	<div id="body" style="width: 1000; height: 100%; float: left;"></div>
 	<!-- <div id="dashboard" style="width: 400; height: 100%; text-align: left; vertical-align: top; float: right;"></div> -->
 	<div id="righttopcorner" style="float: right;">
-	<div id='nameboard' style="width: 100;">
+	<!-- <div id='nameboard' style="width: 100;">
 		<h5 style="float: left;">Sample</h5>
 		<button type="button" style="float: right;" onclick="alert('Hello world!')">Un-utilized View</button>
-	</div>
+	</div> -->
 	<div id='chart'></div>
 	</div>
 
@@ -46,6 +46,7 @@ path.link {
 		var pname = [];
 		var projname = {};
 		var data = [];
+		var unalloc = {};
 	
 		data = getExcelData();
 	
@@ -77,35 +78,36 @@ path.link {
 
 				  var headers = {};
 				  for(z in worksheet) {
-				  	if(z[0] === '!') continue;
-				    //parse out the column, row, and value
-				    var tt = 0;
-				    for (var i = 0; i < z.length; i++) {
-				    	if (!isNaN(z[i])) {
-				        	tt = i;
-				            break;
-				        }
-				    };
-				    var col = z.substring(0,tt);
-				    var row = parseInt(z.substring(tt));
-				    var value = worksheet[z].v;
-
-				    //store header names
-				    if(row == 1 && value) {
-				    	headers[col] = value;
-				        continue;
-				    }
-
-				    if(!_data[row]) _data[row]={};
-				    _data[row][headers[col]] = value;
+					  	if(z[0] === '!') continue;
+					    //parse out the column, row, and value
+					    var tt = 0;
+					    for (var i = 0; i < z.length; i++) {
+					    	if (!isNaN(z[i])) {
+					        	tt = i;
+					            break;
+					        }
+					    };
+					    var col = z.substring(0,tt);
+					    var row = parseInt(z.substring(tt));
+					    var value = worksheet[z].v;
+	
+					    //store header names
+					    if(row == 1 && value) {
+					    	headers[col] = value;
+					        continue;
+					    }
+	
+					    if(!_data[row]) _data[row]={};
+					    _data[row][headers[col]] = value;
 				  }
 				 
 				  //drop those first two rows which are empty
 				  _data.shift();
 				  _data.shift();
-				  console.log("1._data.length:" + _data.length);
-				  
-				  //data = _data;
+
+				  unalloc = calcUnallocation();
+				  console.log("unalloc");
+				  console.log(unalloc);
 				  getChartData("");
 			}		  
 			oReq.send();
@@ -115,11 +117,22 @@ path.link {
 
 		function getChartData(resname) {
 			  jsonArray['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
+			  jsonArray_unallocated['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
 			  var idx = 0;
-			  console.log("2.data.length:" + data.length)
+			  //console.log("2.data.length:" + data.length)
+			  
+			  unvar0 = 100;
+			  unvar1 = 100;
+			  unvar2 = 100;
+			  unvar3 = 100;
+			  unvar4 = 100;
+			  unvar5 = 100;
+			  unvar6 = 100;
+			  unvar7 = 100;
+			  unvar8 = 100;
 			  
 			  for (var x=0; x<data.length; x++) {
-				  console.log(data[x]['Resource Name']);
+				  //console.log(data[x]['Resource Name']);
 				  if (data[x]['Resource Name'] === resname) {
 					  pname = pname.concat(data[x]['Project Name']);
 					  var0 = data[x]['2017-May'];
@@ -128,9 +141,19 @@ path.link {
 					  var3 = data[x]['2017-Aug'];
 					  var4 = data[x]['2017-Sep'];
 					  var5 = data[x]['2017-Oct'];
-					  var6 = data[x]['2017-Nov'];
+					  var6 = data[x]['2017-Nov'];	
 					  var7 = data[x]['2017-Dec'];
 					  var8 = data[x]['2018-Jan'];
+
+					  unvar0 = unvar0 - var0;
+					  unvar1 = unvar1 - var1;
+					  unvar2 = unvar2 - var2;
+					  unvar3 = unvar3 - var3;
+					  unvar4 = unvar4 - var4;
+					  unvar5 = unvar5 - var5;
+					  unvar6 = unvar6 - var6;
+					  unvar7 = unvar7 - var7;
+					  unvar8 = unvar8 - var8;
 					  
 					  var9 = idx+1;
 					  var10 = "p" + var9;
@@ -139,6 +162,11 @@ path.link {
 					  jsonArray[var10] = [var0, var1, var2, var3, var4, var5, var6, var7, var8];
 				  }
 			  }
+			  
+			  jsonArray_unallocated['p1'] = [unvar0, unvar1, unvar2, unvar3, unvar4, unvar5, unvar6, unvar7, unvar8];
+			  console.log("jsonArray_unallocated:");
+			  console.log(jsonArray_unallocated);
+			  
 			  if (Object.keys(jsonArray).length < 2) {
 				  console.log("Record Not Found!!!");
 				  return;
@@ -146,8 +174,8 @@ path.link {
 			  for (var z=0; z<pname.length; z++) {
 				  projname['p'+(z+1)] = pname[z];
 			  }
-			  console.log("projname")
-			  console.log(projname);
+			  //console.log("projname")
+			  //console.log(projname);
 			  //console.log("getChartData");
 			  //console.log(jsonArray);
 			  
@@ -155,14 +183,14 @@ path.link {
 		}
 		
 		function generateChart() {
-			//console.log("generateChart")
+			console.log("jsonArray")
 			console.log(jsonArray);
 			
 			var grp = [];
 			for (var a=0; a<Object.keys(projname).length; a++) {
 				grp[a] = 'p' + (a+1);
 			}
-			console.log(grp);
+			//console.log(grp);
 			
 			var chart = c3.generate({
 			    data: {
@@ -189,7 +217,36 @@ path.link {
 			projname = {};
 		}
 		
+		function calcUnallocation() {
+			var unallocation = {};
+			
+			 for (var x=0; x<data.length; x++) {
+				 var resource = data[x]['Resource Name'];
+				 
+				 if (unallocation[resource]) {
+					 //Do Nothing
+				 } else {
+					 var rowval = data[x]['2017-May'] + data[x]['2017-Jun'] + data[x]['2017-Jul'] + data[x]['2017-Aug'] + data[x]['2017-Sep'] + data[x]['2017-Oct'] + data[x]['2017-Nov'] + data[x]['2017-Dec'] + data[x]['2018-Jan'];
+					 
+					 for (var y=x+1; y<data.length; y++) {
+						 if (resource == data[y]['Resource Name']) {
+							 rowval = rowval + data[y]['2017-May'] + data[y]['2017-Jun'] + data[y]['2017-Jul'] + data[y]['2017-Aug'] + data[y]['2017-Sep'] + data[y]['2017-Oct'] + data[y]['2017-Nov'] + data[y]['2017-Dec'] + data[y]['2018-Jan'];
+						 }
+						 /* console.log("rowval");
+						 console.log(rowval); */
+					 }
+					 unallocation[resource] = rowval/9;
+				 }
+			 }
+			 
+			 return unallocation;
+		}
 		
+		
+		
+		/*
+		*	Dendogram
+		*/
 	
 		//var m = [ 20, 120, 20, 120 ], w = 1280 - m[1] - m[3], h = 800 - m[0] - m[2], i = 0, root;
 		var m = [ 20, 120, 20, 120 ], w = 1000 - m[1] - m[3], h = 800 - m[0] - m[2], i = 0, root;
@@ -223,7 +280,7 @@ path.link {
 			/*toggle(root.children[1].children[2]);
 			toggle(root.children[9]);
 			toggle(root.children[9].children[0]); */
-
+			
 			update(root);
 		});
 
@@ -236,6 +293,7 @@ path.link {
 			// Normalize for fixed-depth.
 			nodes.forEach(function(d) {
 				d.y = d.depth * 180;
+				d.unutilized = unalloc[d.name];
 			});
 
 			// Update the nodes…
@@ -266,7 +324,24 @@ path.link {
 				return d.children || d._children ? "end" : "start";
 			}).text(function(d) {
 				return d.name;
-			}).style("fill-opacity", 1e-6);
+			//}).style("fill-opacity", 1e-6);
+			}).style("fill",
+					function(d) {
+						var colr = "steelblue";
+						
+						if (d.unutilized) {
+							if (d.unutilized == 100)
+								colr = "steelblue";
+							else {
+								if (d.unutilized < 100 && d.unutilized > 70)
+									colr = "orange";
+								else
+									colr = "red";
+							}	
+						}
+						
+						return colr;
+			}).style("font-size", "14px").style("font-family", "Verdana, Geneva, sans-serif");
 
 			// Transition nodes to their new position.
 			var nodeUpdate = node.transition().duration(duration).attr(
@@ -276,7 +351,7 @@ path.link {
 
 			nodeUpdate.select("circle").attr("r", 4.5).style("fill",
 					function(d) {
-						return d._children ? "lightsteelblue" : "#fff";
+						return d._children ?  "lightsteelblue" : "#fff";
 					});
 
 			nodeUpdate.select("text").style("fill-opacity", 1);
