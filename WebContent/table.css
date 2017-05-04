@@ -1,0 +1,19 @@
+th, td {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:1em;
+    padding-left:7px;
+    padding-right:7px;
+    padding-top:4px;
+    padding-bottom:4px;
+    vertical-align:middle;
+    text-align:center;
+}
+
+th {
+    color:white;
+    background-color:steelblue;
+}
+
+td {
+    background-color:lightblue;
+}

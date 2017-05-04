@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link type="text/css" rel="stylesheet" href="Style.css" />
+<link type="text/css" rel="stylesheet" href="menu.css" />
+<!-- <link type="text/css" rel="stylesheet" href="Style.css" />  -->
 <link type="text/css" rel="stylesheet" href="c3/c3.css" />
 <script type="text/javascript" src="d3/d3.js"></script>
 <script type="text/javascript" src="d3/d3.layout.js"></script>
@@ -30,12 +31,20 @@ path.link {
 </style>
 </head>
 <body>
+	<nav>
+		<ul>
+		  <li><a class="active" href="index.html">Home</a></li>
+		  <li><a href="index2.html">Resource View</a></li>
+		  <li><a href="index3.html">Project View</a></li>
+		</ul>
+	</nav>
 	<div id="headerpart" align="center" style="font-family: Verdana, Geneva, sans-serif">
 		<font color="red">Less than 70%		</font>
 		<font color="orange">	Between 70% and 100%</font>
 		<font color="steelblue">	100%</font>
 	</div>
-	<div id="body" style="width: 1000; height: 100%; float: left;"></div>
+	<!-- <div id="body" style="width: 1000; height: 100%; float: left;"></div>  -->
+	<div id="body" style="float: left;"></div>
 	<div id="righttopcorner" style="float: right;">
 		<p id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif">Heading2</p>
 		<div id='chart'></div>
