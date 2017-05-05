@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link type="text/css" rel="stylesheet" href="menu1.css" />
+<link type="text/css" rel="stylesheet" href="menu.css" />
 <!-- <link type="text/css" rel="stylesheet" href="Style.css" />  -->
 <link type="text/css" rel="stylesheet" href="c3/c3.css" />
 <script type="text/javascript" src="d3/d3.js"></script>
@@ -33,17 +33,11 @@ path.link {
 <body>
 	<nav>
 		<ul>
-		  <li><a class="active" href="index.html">Home</a></li>
-		  <li><a href="index2.html">Resource View</a></li>
-		  <li><a href="index3.html">Project View</a></li>
+		  <li><a class="active" href="home.html">Home</a></li>
+		  <li><a href="resource_view.html">Resource View</a></li>
+		  <li><a href="project_view.html">Project View</a></li>
 		</ul>
 	</nav>
-	<div id="headerpart" align="center" style="font-family: Verdana, Geneva, sans-serif">
-		<font color="red">Less than 70%		</font>
-		<font color="orange">	Between 70% and 100%</font>
-		<font color="steelblue">	100%</font>
-	</div>
-	<!-- <div id="body" style="width: 1000; height: 100%; float: left;"></div>  -->
 	<div id="body" style="float: left;"></div>
 	<div id="righttopcorner" style="float: right;">
 		<p id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif">Heading2</p>
@@ -207,6 +201,7 @@ path.link {
 			
 			var chart = c3.generate({
 			    data: {
+			    	bindto: "#chart",
 			    	x: 'x',
 			        json: jsonArray,
 			        type: 'bar',
@@ -262,7 +257,18 @@ path.link {
 		*/
 	
 		//var m = [ 20, 120, 20, 120 ], w = 1280 - m[1] - m[3], h = 800 - m[0] - m[2], i = 0, root;
-		var m = [ 20, 120, 20, 120 ], w = 1000 - m[1] - m[3], h = 800 - m[0] - m[2], i = 0, root;
+		var m = [ 20, 120, 20, 120 ], w = 1000 - m[1] - m[3], h = 700 - m[0] - m[2], i = 0, root;
+		
+		var circleData = [
+			   { "cx": 0, "cy": 610, "radius": 5, "color" : "red" },
+			   { "cx": 0, "cy": 630, "radius": 5, "color" : "orange" },
+			   { "cx": 0, "cy": 650, "radius": 5, "color" : "steelblue" }
+			   ];
+		var legendData = [
+				{"x": 10, "y": 615, "id" : "onecat"},
+				{"x": 10, "y": 635, "id" : "twocat"},
+				{"x": 10, "y": 655, "id" : "threecat"}
+		];
 		
 		var tree = d3.layout.tree().size([ h, w ]);
 
@@ -275,6 +281,34 @@ path.link {
 				.append("svg:g").attr("transform",
 						"translate(" + m[3] + "," + m[0] + ")");
 
+		var circles = vis.selectAll("circle")
+        .data(circleData)
+        .enter()
+        .append("circle");
+
+		var circleAttributes = circles
+		    .attr("cx", function (d) { return d.cx; })
+		    .attr("cy", function (d) { return d.cy; })
+		    .attr("r", function (d) { return d.radius; })
+		    .style("fill", function (d) { return d.color; });
+		
+		var legends = vis.selectAll("text")
+			        .data(legendData)
+			        .enter()
+			        .append("text");
+		
+		var legendAttributes = legends
+			    .attr("x", function (d) { return d.x; })
+			    .attr("y", function (d) { return d.y; })
+			    .attr("id", function (d) { return d.id; })
+			    .style("font-family", "Verdana, Geneva, sans-serif")
+			    .style("font-size", "10px")
+			    .style("font-style", "italic");
+
+		document.getElementById('onecat').textContent = "Less than 70%";
+		document.getElementById('twocat').textContent = "Between 70% and 100%";
+		document.getElementById('threecat').textContent = "100%";
+		
 		d3.json("org_struct.json", function(json) {
 			root = json;
 			root.x0 = h / 2;
