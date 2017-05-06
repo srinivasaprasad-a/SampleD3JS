@@ -39,14 +39,33 @@ path.link {
 		</ul>
 	</nav>
 	<div id="body" style="float: left;"></div>
+	
+	<!-- <div id="barchart" style="float: right;"></div>  -->
+	
 	<div id="righttopcorner" style="float: right;">
 		<p id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif">Heading2</p>
-		<div id='chart'></div>
+		<div id="barchart"></div>
+	</div>
+	
+	<div id="q1" style="float: right;">
+	</div>
+	
+	<div id="q2" style="float: right;">
+	</div>
+
+	<div id="q3" style="float: right;">
+	</div>
+
+	<div id="q4" style="float: right;">
 	</div>
 
 	<script type="text/javascript">
 		var jsonArray = {};
 		var jsonArray_unallocated = {};
+		var q1data = {};
+		var q2data = {};
+		var q3data = {};
+		var q4data = {};
 		var pname = [];
 		var projname = {};
 		var data = [];
@@ -151,7 +170,7 @@ path.link {
 					  var6 = data[x]['2017-Nov'];	
 					  var7 = data[x]['2017-Dec'];
 					  var8 = data[x]['2018-Jan'];
-
+					  
 					  unvar0 = unvar0 - var0;
 					  unvar1 = unvar1 - var1;
 					  unvar2 = unvar2 - var2;
@@ -167,12 +186,18 @@ path.link {
 					  idx++;
 					  	
 					  jsonArray[var10] = [var0, var1, var2, var3, var4, var5, var6, var7, var8];
+					  q2data[var10] = (var0+var1+var2)/3;
+					  q3data[var10] = (var3+var4+var5)/3;
+					  q4data[var10] = (var6+var7+var8)/3;
 				  }
 			  }
 			  
+			  //console.log("q2data");
+			  //console.log(q2data);
+			  
 			  jsonArray_unallocated['p1'] = [unvar0, unvar1, unvar2, unvar3, unvar4, unvar5, unvar6, unvar7, unvar8];
-			  console.log("jsonArray_unallocated:");
-			  console.log(jsonArray_unallocated);
+			  //console.log("jsonArray_unallocated:");
+			  //console.log(jsonArray_unallocated);
 			  
 			  if (Object.keys(jsonArray).length < 2) {
 				  console.log("Record Not Found!!!");
@@ -199,9 +224,9 @@ path.link {
 			}
 			//console.log(grp);
 			
-			var chart = c3.generate({
+			var chart1 = c3.generate({
+		    	bindto: "#barchart",
 			    data: {
-			    	bindto: "#chart",
 			    	x: 'x',
 			        json: jsonArray,
 			        type: 'bar',
@@ -220,9 +245,62 @@ path.link {
 			            }
 			        }
 			});
+			
+			var chart2 = c3.generate({
+		    	bindto: "#q2",
+			    data: {
+			        json: q2data,
+			        type: 'pie',
+			        names: projname
+			    },
+			    legend: {
+			    	show: false
+			    },
+			    size: {
+			    	  width: 230,
+			    	  height: 150
+			    	}
+			});
+			
+			var chart3 = c3.generate({
+		    	bindto: "#q3",
+			    data: {
+			        json: q3data,
+			        type: 'pie',
+			        names: projname
+			    },
+			    legend: {
+			    	show: false
+			    },
+			    size: {
+			    	  width: 230,
+			    	  height: 150
+			    	}
+			});
+			
+			var chart4 = c3.generate({
+		    	bindto: "#q4",
+			    data: {
+			        json: q4data,
+			        type: 'pie',
+			        names: projname
+			    },
+			    legend: {
+			    	show: false
+			    },
+			    size: {
+			    	  width: 230,
+			    	  height: 150
+			    	}
+			});
+			
 			jsonArray = {};
 			pname = [];
 			projname = {};
+			q1data = {};
+			q2data = {};
+			q3data = {};
+			q4data = {};
 		}
 		
 		function calcUnallocation() {
