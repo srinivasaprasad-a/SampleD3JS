@@ -23,6 +23,14 @@ nav {
     margin: 0;
     padding: 0;
   }
+  
+  ul#Navigation .active{
+    border-color: white;
+    border-left-color: black; 
+    border-top-color: black;
+    color: white; 
+    background-color: #adadad;
+}
 
     nav ul li {
       display: inline-block;

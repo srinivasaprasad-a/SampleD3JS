@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>Resource View</title>
 <link type="text/css" rel="stylesheet" href="menu.css" />
 <!-- <link type="text/css" rel="stylesheet" href="Style.css" />  -->
 <link type="text/css" rel="stylesheet" href="c3/c3.css" />
@@ -32,9 +33,9 @@ path.link {
 </head>
 <body>
 	<nav>
-		<ul>
-		  <li><a class="active" href="home.html">Home</a></li>
-		  <li><a href="resource_view.html">Resource View</a></li>
+		<ul id="Navigation">
+		  <li><a href="home.html">Home</a></li>
+		  <li><a class="active" href="resource_view.html">Resource View</a></li>
 		  <li><a href="project_view.html">Project View</a></li>
 		</ul>
 	</nav>
@@ -43,11 +44,61 @@ path.link {
 	<!-- <div id="barchart" style="float: right;"></div>  -->
 	
 	<div id="righttopcorner" style="float: right;">
-		<p id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif">Heading2</p>
+		<h4 id="chart-heading" align="center" style="font-family: Verdana, Geneva, sans-serif; line-height: 0px">Heading2</h4>
 		<div id="barchart"></div>
 	</div>
 	
-	<div id="q1" style="float: right;">
+ 	<div id='collapseMe' class='panel-collapse in' style='float: right;'>
+	  <div class='row'>
+	    <div class='col-lg-6'>
+	      <div class='panel panel-default'>
+	        <div class='panel-heading'>
+	          <h4 class='panel-title' style='line-height: 0px'> Q1 2017 </h4>
+	        </div>
+	        <div class='panel-body'>
+	          <div id='q1'></div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class='col-lg-6'>
+	      <div class='panel panel-default'>
+	        <div class='panel-heading'>
+	          <h4 class='panel-title' style='line-height: 0px'> Q2 2017 </h4>
+	        </div>
+	        <div class='panel-body'>
+	          <div id='q2'></div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+	<div id='collapseMe2' class='panel-collapse in' style='float: right;'>
+	  <div class='row'>
+	    <div class='col-lg-61'>
+	      <div class='panel panel-default'>
+	        <div class='panel-heading'>
+	          <h4 class='panel-title' style='line-height: 0px'> Q3 2017 </h4>
+	        </div>
+	        <div class='panel-body'>
+	          <div id='q3'></div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class='col-lg-61'>
+	      <div class='panel panel-default'>
+	        <div class='panel-heading'>
+	          <h4 class='panel-title' style='line-height: 0px'> Q4 2017 </h4>
+	        </div>
+	        <div class='panel-body'>
+	          <div id='q4'></div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+<!-- 	<div id="q1" style="float: right;">
 	</div>
 	
 	<div id="q2" style="float: right;">
@@ -57,7 +108,7 @@ path.link {
 	</div>
 
 	<div id="q4" style="float: right;">
-	</div>
+	</div> -->
 
 	<script type="text/javascript">
 		var jsonArray = {};
@@ -142,11 +193,14 @@ path.link {
 			
 			document.getElementById("chart-heading").innerHTML = resname;
 			
-			  jsonArray['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
-			  jsonArray_unallocated['x'] = ['2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
+			  jsonArray['x'] = ['2017-02-01','2017-03-01','2017-04-01','2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
+			  jsonArray_unallocated['x'] = ['2017-02-01','2017-03-01','2017-04-01','2017-05-01','2017-06-01','2017-07-01','2017-08-01','2017-09-01','2017-10-01','2017-11-01','2017-12-01','2018-01-01'];
 			  var idx = 0;
 			  //console.log("2.data.length:" + data.length)
 			  
+			  unvar00 = 100;
+			  unvar01 = 100;
+			  unvar02 = 100;
 			  unvar0 = 100;
 			  unvar1 = 100;
 			  unvar2 = 100;
@@ -161,6 +215,9 @@ path.link {
 				  //console.log(data[x]['Resource Name']);
 				  if (data[x]['Resource Name'] === resname) {
 					  pname = pname.concat(data[x]['Project Name']);
+					  var00 = data[x]['2017-Feb'];
+					  var01 = data[x]['2017-Mar'];
+					  var02 = data[x]['2017-Apr'];
 					  var0 = data[x]['2017-May'];
 					  var1 = data[x]['2017-Jun'];
 					  var2 = data[x]['2017-Jul'];
@@ -171,6 +228,9 @@ path.link {
 					  var7 = data[x]['2017-Dec'];
 					  var8 = data[x]['2018-Jan'];
 					  
+					  unvar00 = unvar00 - var00;
+					  unvar01 = unvar01 - var01;
+					  unvar02 = unvar02 - var02;
 					  unvar0 = unvar0 - var0;
 					  unvar1 = unvar1 - var1;
 					  unvar2 = unvar2 - var2;
@@ -185,7 +245,8 @@ path.link {
 					  var10 = "p" + var9;
 					  idx++;
 					  	
-					  jsonArray[var10] = [var0, var1, var2, var3, var4, var5, var6, var7, var8];
+					  jsonArray[var10] = [var00, var01, var02, var0, var1, var2, var3, var4, var5, var6, var7, var8];
+					  q1data[var10] = (var00+var01+var02)/3;
 					  q2data[var10] = (var0+var1+var2)/3;
 					  q3data[var10] = (var3+var4+var5)/3;
 					  q4data[var10] = (var6+var7+var8)/3;
@@ -201,10 +262,13 @@ path.link {
 			  
 			  if (Object.keys(jsonArray).length < 2) {
 				  console.log("Record Not Found!!!");
-				  return;
-			  }
-			  for (var z=0; z<pname.length; z++) {
-				  projname['p'+(z+1)] = pname[z];
+				  jsonArray['p1'] = [0,0,0,0,0,0,0,0,0,0,0,0];
+				  projname['p1'] = "Unallocated";
+				  //return;
+			  } else {
+				  for (var z=0; z<pname.length; z++) {
+					  projname['p'+(z+1)] = pname[z];
+				  }				  
 			  }
 			  //console.log("projname")
 			  //console.log(projname);
@@ -234,7 +298,8 @@ path.link {
 			        groups: [grp]
 			    },
 			    size: {
-			    	  width: 500
+			    	  width: 500,
+			    	  height:300
 			    	},
 			    	axis: {
 			            x: {
@@ -244,6 +309,22 @@ path.link {
 			                }
 			            }
 			        }
+			});
+			
+			var chart01 = c3.generate({
+		    	bindto: "#q1",
+			    data: {
+			        json: q1data,
+			        type: 'pie',
+			        names: projname
+			    },
+			    legend: {
+			    	show: false
+			    },
+			    size: {
+			    	  width: 230,
+			    	  height: 150
+			    	}
 			});
 			
 			var chart2 = c3.generate({
@@ -312,16 +393,16 @@ path.link {
 				 if (unallocation[resource]) {
 					 //Do Nothing
 				 } else {
-					 var rowval = data[x]['2017-May'] + data[x]['2017-Jun'] + data[x]['2017-Jul'] + data[x]['2017-Aug'] + data[x]['2017-Sep'] + data[x]['2017-Oct'] + data[x]['2017-Nov'] + data[x]['2017-Dec'] + data[x]['2018-Jan'];
+					 var rowval = data[x]['2017-Feb'] + data[x]['2017-Mar'] + data[x]['2017-Apr'] + data[x]['2017-May'] + data[x]['2017-Jun'] + data[x]['2017-Jul'] + data[x]['2017-Aug'] + data[x]['2017-Sep'] + data[x]['2017-Oct'] + data[x]['2017-Nov'] + data[x]['2017-Dec'] + data[x]['2018-Jan'];
 					 
 					 for (var y=x+1; y<data.length; y++) {
 						 if (resource == data[y]['Resource Name']) {
-							 rowval = rowval + data[y]['2017-May'] + data[y]['2017-Jun'] + data[y]['2017-Jul'] + data[y]['2017-Aug'] + data[y]['2017-Sep'] + data[y]['2017-Oct'] + data[y]['2017-Nov'] + data[y]['2017-Dec'] + data[y]['2018-Jan'];
+							 rowval = rowval + data[y]['2017-Feb'] + data[y]['2017-Mar'] + data[y]['2017-Apr'] + data[y]['2017-May'] + data[y]['2017-Jun'] + data[y]['2017-Jul'] + data[y]['2017-Aug'] + data[y]['2017-Sep'] + data[y]['2017-Oct'] + data[y]['2017-Nov'] + data[y]['2017-Dec'] + data[y]['2018-Jan'];
 						 }
 						 /* console.log("rowval");
 						 console.log(rowval); */
 					 }
-					 unallocation[resource] = rowval/9;
+					 unallocation[resource] = rowval/12;
 				 }
 			 }
 			 
